@@ -24,27 +24,26 @@ int main() {
 
 	for (int i = 0; i < n; i++) visited.push_back(false);
 
-	DFS(0,0);
+	DFS(0, 0);
 	cout << diff;
 
 	return 0;
 }
 
 void DFS(int curr, int cnt) { // curr¹ø ¼±¼ö¸¦ ½ºÅ¸Æ®ÆÀÀ» »Ì´Â´Ù, cnt : »ÌÀº ¸í¼ö
-	
+
 	if (cnt == n / 2) { // n/2¸íÀ» ½ºÅ¸Æ®ÆÀÀ¸·Î »Ì¾ÒÀ¸¸é °¢ÆÀÀÇ Á¡¼öÂ÷¸¦ °è»ê
-		
+
 		vector<int> start, link; // ½ºÅ¸Æ®ÆÀ ÆÀ¿ø, ¸µÅ©ÆÀ ÆÀ¿ø
+
 		for (int i = 0; i < n; i++) { // °¢ÆÀ¿¡ ÆÀ¿ø »ðÀÔ
 			if (visited[i]) start.push_back(i);
 			else link.push_back(i);
 		}
 
-
 		for (int i = 0; i < start.size(); i++) { // ½ºÅ¸Æ®ÆÀ ÃÑÁ¡
 			for (int j = 0; j < start.size(); j++) {
-				if (i != j) {
-					//cout << endl << start[i] << ",  " << start[j] << endl; // for check
+				if (start[i] != start[j]) {
 					startScore += mat[start[i]][start[j]];
 				}
 			}
@@ -52,34 +51,21 @@ void DFS(int curr, int cnt) { // curr¹ø ¼±¼ö¸¦ ½ºÅ¸Æ®ÆÀÀ» »Ì´Â´Ù, cnt : »ÌÀº ¸í¼
 
 		for (int i = 0; i < link.size(); i++) { // ¸µÅ©ÆÀ ÃÑÁ¡
 			for (int j = 0; j < link.size(); j++) {
-				if (i != j) {
-					//cout << endl << link[i] << ",  " << link[j] << endl; // for check
+				if (link[i] != link[j]) {
 					linkScore += mat[link[i]][link[j]];
 				}
 			}
 		}
 
 		int res = abs(startScore - linkScore); // Á¡¼öÂ÷ (Àý´ñ°ª)
-
-		// for check ///////////////////
-		cout << startScore << endl;
-		cout << linkScore << endl;
-		////////////////////////////////
-
 		diff = min(diff, res); // ÀÛÀº °ªÀ¸·Î °»½Å
-
-		// for check ///////////////////
-		cout << diff << endl << endl << endl;
-		////////////////////////////////
-
 	}
 
-	for (int i = curr; i < n; i++) { // ½ºÅ¸Æ®ÆÀ ÆÀ¿ø Á¤ÇÏ±â
+	for (int i = curr + 1; i < n; i++) { // ½ºÅ¸Æ®ÆÀ ÆÀ¿ø Á¤ÇÏ±â // ¿Ö curr "+1"ÇÏÁö????
 		if (!visited[i]) {
 			visited[i] = true;
 			DFS(i, cnt + 1);
 			visited[i] = false;
 		}
 	}
-
 }
