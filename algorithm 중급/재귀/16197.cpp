@@ -1,10 +1,3 @@
-/*
-선택한 방향으로 동전을 굴렸을 때,
-	1) 2개의 동전 모두 mat 밖으로 떨어진다면? > 해당 방향으로는 진행하면 안됨 (문제조건 : 1개만 떨어뜨리는 최소횟수를 구하는 것임)
-	2) 2개 중 1개만 떨어진다면?
-	3) 2개 모두 떨어지지 않는다면?
-*/
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -105,3 +98,5 @@ int main() {
 
 	return 0;
 }
+
+// ref : https://yabmoons.tistory.com/61
